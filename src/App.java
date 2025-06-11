@@ -51,7 +51,7 @@ public class App {
                     manager.saveToFile(filename);
                 }
                 case 7 -> {
-                    System.out.println("Enter filename to laod: ");
+                    System.out.print("Enter filename to laod: ");
                     String filename = scanner.nextLine();
                     manager.loadFromFile(filename);
                 }

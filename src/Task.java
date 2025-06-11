@@ -12,7 +12,7 @@ public class Task{
         return title;
     }
 
-    public boolean getisDone(){
+    public boolean isDone(){
         return isDone;
     }
 
