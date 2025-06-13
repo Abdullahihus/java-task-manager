@@ -35,6 +35,10 @@ public class Task{
         return priority;
     }
 
+    public void toggleDone() {
+        isDone = !isDone;
+    }
+    
     @Override 
     public String toString(){
         return (isDone ? "[x] " : "[ ] ") + title +  " (Due: " + dueDate + ", Priority: " + priority + ") ";
