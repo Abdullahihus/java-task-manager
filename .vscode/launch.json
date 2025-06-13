@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "AppGUI",
+      "request": "launch",
+      "mainClass": "AppGUI",
+      "projectName": "Taskmanager_9d1c55b0"
+    },
+    {
+      "type": "java",
+      "name": "Launch JavaFX App",
+      "request": "launch",
+      "mainClass": "gui.AppGUI",
+      "vmArgs": "--module-path ./javafx-sdk-17.0.15/lib --add-modules javafx.controls,javafx.fxml"
+    }
+  ]
+}

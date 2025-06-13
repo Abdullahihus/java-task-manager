@@ -18,7 +18,14 @@ public class App {
                 case 1 -> {
                     System.out.print("Enter task title: ");
                     String title = scanner.nextLine();
-                    manager.addTask(title);
+
+                    System.out.print("Enter due date (YYYY-MM-DD): ");
+                    String dueDate = scanner.nextLine();
+
+                    System.out.print("Enter priority (Low, Medium, High): ");
+                    String priority = scanner.nextLine();
+
+                    manager.addTask(new Task(title, dueDate, priority));
                 }
                 case 2 -> {
                     manager.viewTasks();

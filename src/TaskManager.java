@@ -8,9 +8,8 @@ public class TaskManager {
 
     private ArrayList<Task> tasks = new ArrayList<>();
 
-    public void addTask(String title) {
-        Task newTask = new Task(title);
-        tasks.add(newTask);
+    public void addTask(Task task) {
+        tasks.add(task);
         System.out.println("Task added");
     }
 
@@ -52,7 +51,10 @@ public class TaskManager {
     public void saveToFile(String filename) {
         try (FileWriter writer = new FileWriter(filename)) {
             for (Task task : tasks) {
-                String line = (task.isDone() ? "[x] " : "[ ] ") + task.getTitle();
+                String line = (task.isDone() ? "[x] " : "[ ] ") + 
+                task.getTitle() + " | " + 
+                task.getDueDate() + " | " + 
+                task.getPriority();
                 writer.write(line + "\n");
             }
             System.out.println("Tasks saved to " + filename);
@@ -63,15 +65,35 @@ public class TaskManager {
 
     public void loadFromFile(String filename) {
         tasks.clear();
-
+        //BufferReader: way to read file in java
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
+                if(line.trim().isEmpty()){
+                    continue;
+                }
+                //split: splits at delimeter "|"
+                //trim: gets rid of white space
                 boolean done = line.startsWith("[x]");
-                String title = line.length() > 4 ? line.substring(4) : "Untitled Task";
-                Task task = new Task(title);
-                if (done)
+                
+                //split starting at title and for every "|" array store the words after it
+                String[] parts = line.substring(4).split("\\|");
+                
+                //check if we have the whole task with title, dueDate and priority
+                if(parts.length < 3){
+                    System.out.println("Skipping invalid line: " + line);
+                    continue;
+                }
+
+                String title = parts[0].trim();
+                String dueDate = parts[1].trim();
+                String priority = parts[2].trim();
+
+                Task task = new Task(title, dueDate, priority);
+                if (done){
                     task.markDone();
+                }
+
                 tasks.add(task);
 
             }
